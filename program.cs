@@ -27,6 +27,17 @@ namespace Calling_InboundCall
                 Stop();
                 return;
             }
+            
+            RecordAction actionRecord = call.RecordAsync(new CallRecord
+            {
+            Audio = new CallRecord.AudioParams
+            {
+            Direction = CallRecord.AudioParams.AudioDirection.both,
+            InitialTimeout = 5,
+            EndSilenceTimeout = 5,
+            }
+            });
+            
             var resultPromptSpeech = call.PromptTTS("Please say something",
             new CallCollect()
             {
